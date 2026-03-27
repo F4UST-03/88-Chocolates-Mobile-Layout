@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <title>Transaction</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      body { 
+        margin: 0;
+        background: #fff;
+        color: #333;
+    }
+      .container {
+        max-width: 420px;
+        margin: 20px auto;
+        padding: 14px;
+        padding-bottom: 100px;
+    }
+      .top {
+        display: flex;
+        margin-bottom: 12px;
+        margin-top: 7%;
+        border: 1px solid #411C0E;
+        border-radius: 50px;
+        background-color: #fff;
+        align-items: center;
+        padding: 2px 6px;
+    }
+      .search {
+        flex: 1;
+        padding: 9px;
+        border: none;
+        background-color: #fff;
+        border-radius: 8px;
+    }
+      .date-container {
+        display: flex;
+        flex-direction: row;
+        padding: 1px 0;
+        margin: 15% 0 0 0;
+        color: #411C0E;
+        align-items: center;
+        justify-content: end;
+        margin-bottom: 12px;
+      }
+        .date-container .date {
+          border: 1px solid #411C0E;
+          width: 120px;
+          font-weight: 100;
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          padding: 2.2px 0 2.2px 3px; 
+          box-sizing: border-box;
+          font-size: 75%;
+          align-items: center;
+          justify-content: center;
+        }
+        .date-container .date::-webkit-calendar-picker-indicator {
+          margin-left: 0;
+          padding: 0;
+        }
+      .select-all {
+        margin: 10px 0;
+        border: #411C0E 1px solid;
+        padding: 4px 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+        .select-all label {
+            display: flex;
+            gap: 4px;
+            font-size: 90%;
+            align-items: center;
+        }
+        .select-all svg {
+            width: 20px;
+            height: 20px;
+            margin: 0 0 0 5px;
+        }
+        .select-all input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #888;
+            border-radius: 4px;
+            background-color: #fff;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    }
+      .thumb {
+        width: 60px;
+        height: 60px;
+        background: #ffd6e6;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #6b3f2b;
+    }
+      .meta {
+        flex: 1;
+    }
+      .meta .name {
+        font-weight: bold;
+    }
+      .meta .txn {
+        font-size: 12px;
+        color: #777;
+    }
+      .options {
+        margin: 6px 0;
+    }
+      .qty {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+      .qty button {
+        border:0;
+        background:#eee;
+        padding:4px 8px;
+        border-radius:4px;
+        cursor:pointer;
+    }
+      .price {
+        font-weight: bold;
+        color: #111;
+    }
+      .bottom {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 48px);
+        max-width: 420px;
+        padding: 10px;
+        background: #fff;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        z-index: 100;
+        justify-content: flex-end;
+      }
+      .summary {
+        display: flex;
+        flex-direction: row;
+        margin-top: 12px;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid #411C0E;
+        padding: 10px 8px;
+        font-size: 90%;
+    } 
+      .continue {
+        margin: 0 20px 0 0;
+        width: 50%;
+        padding: 12px;
+        background: #6b3f2b;
+        color: #fff;
+        border: 0;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        position: fixed;
+        bottom: 8%;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="top">
+            <input id="search" class="search" type="search" placeholder="Search">
+            <svg width="23" height="23" viewBox="2 1 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#411C0E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div class="date-container">
+          <input id="date" class="date" type="date">
+        </div>
+
+
+        <div class="select-all">
+            <label><input type="checkbox" id="selectAll"> Select All</label>
+            <svg  viewBox="2 1 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6H4V4H9V3H15V4H20V6H19V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM9 17H11V8H9V17ZM13 17H15V8H13V17Z" fill="#B00B0B" fill-opacity="0.8"/>
+            </svg>
+        </div>
+
+        <div id="list"></div>
+
+        <div class="summary" id="grand">
+          <div>Grand total: </div>
+          <div style="font-weight: bold; color: #411C0E;">₱0.00</div>
+        </div>
+
+        <button class="continue" id="continue">Continue</button>  
+</body>
+</html>
